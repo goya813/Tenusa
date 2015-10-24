@@ -1,12 +1,13 @@
 package usa.ten.game.tenusa;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class TopActivity extends ActionBarActivity {
+public class TopActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
