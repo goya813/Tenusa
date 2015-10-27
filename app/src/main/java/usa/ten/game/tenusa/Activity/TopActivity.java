@@ -1,14 +1,17 @@
-package usa.ten.game.tenusa;
+package usa.ten.game.tenusa.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
+import usa.ten.game.tenusa.R;
 import usa.ten.game.tenusa.drawer.PointDrawerItem;
 import usa.ten.game.tenusa.drawer.PointDrawerView;
 
@@ -46,6 +49,15 @@ public class TopActivity extends Activity {
             @Override
             public void onClick(View v){
                 pointDrawerview.addPoint(2);
+            }
+        });
+
+        final Button powerUp = (Button)findViewById(R.id.powerup);
+        powerUp.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(TopActivity.this, PowerUpActivity.class);
+                startActivity(intent);
             }
         });
     }
