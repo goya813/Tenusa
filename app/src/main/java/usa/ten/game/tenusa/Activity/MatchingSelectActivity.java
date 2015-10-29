@@ -1,11 +1,15 @@
 package usa.ten.game.tenusa.Activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import java.util.ArrayList;
@@ -27,6 +31,23 @@ public class MatchingSelectActivity extends Activity {
 
         GridView personGrid = (GridView)findViewById(R.id.person_grid);
         personGrid.setAdapter(adapter);
+
+        personGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+                new AlertDialog.Builder(MatchingSelectActivity.this)
+                        .setTitle("title")
+                        .setMessage("message")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            }
+        });
     }
 
     private ArrayList<MatchingSelectItemBeans> loadMatchingItems()
