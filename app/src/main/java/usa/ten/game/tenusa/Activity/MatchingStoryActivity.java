@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import usa.ten.game.tenusa.R;
 
-public class Matching_story extends Activity {
+public class MatchingStoryActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
