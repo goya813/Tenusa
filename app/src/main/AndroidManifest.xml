@@ -20,6 +20,14 @@
             android:name=".Activity.PowerUpActivity"
             android:label="@string/title_activity_power_up" >
         </activity>
+        <activity
+            android:name=".Activity.MatchingSelectActivity"
+            android:label="@string/title_activity_matching_select" >
+        </activity>
+        <activity
+            android:name=".Activity.Matching_story"
+            android:label="@string/title_activity_matching_story" >
+        </activity>
     </application>
 
 </manifest>

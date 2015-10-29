@@ -60,6 +60,15 @@ public class TopActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        final Button matching = (Button)findViewById(R.id.matching);
+        matching.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TopActivity.this, MatchingSelectActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
