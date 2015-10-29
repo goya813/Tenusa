@@ -3,6 +3,7 @@ package usa.ten.game.tenusa.Activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -41,8 +42,9 @@ public class MatchingSelectActivity extends Activity {
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent  = new Intent(MatchingSelectActivity.this, Matc)
-
+                                Intent intent  = new Intent(MatchingSelectActivity.this, MatchingStoryActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
                         })
                         .setNegativeButton("Cancel", null)
