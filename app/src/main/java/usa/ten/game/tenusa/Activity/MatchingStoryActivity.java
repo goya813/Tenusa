@@ -1,6 +1,7 @@
 package usa.ten.game.tenusa.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +21,9 @@ public class MatchingStoryActivity extends Activity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MatchingStoryActivity.this, MatchingBattleActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
