@@ -28,6 +28,10 @@
             android:name=".Activity.MatchingStoryActivity"
             android:label="@string/title_activity_matching_story" >
         </activity>
+        <activity
+            android:name=".Activity.MatchingBattleActivity"
+            android:label="@string/title_activity_matching_battle" >
+        </activity>
     </application>
 
 </manifest>

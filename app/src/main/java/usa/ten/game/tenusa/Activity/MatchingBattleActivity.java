@@ -1,29 +1,43 @@
 package usa.ten.game.tenusa.Activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 
 import usa.ten.game.tenusa.R;
 
-public class MatchingStoryActivity extends Activity {
+public class MatchingBattleActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_matching_story);
+        setContentView(R.layout.activity_matching_battle);
 
-        Button nextButton = (Button)findViewById(R.id.next_button);
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        setClickListener();
+    }
+
+    private void setClickListener()
+    {
+        final ImageView usagiImg = (ImageView)findViewById(R.id.battle_usagi_img);
+        usagiImg.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MatchingStoryActivity.this, MatchingBattleActivity.class);
-                startActivity(intent);
-                finish();
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                switch (motionEvent.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        usagiImg.setImageResource(R.mipmap.usagi_attack);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        usagiImg.setImageResource(R.mipmap.usagi);
+                        break;
+                }
+
+                return true;
             }
         });
     }
@@ -31,7 +45,7 @@ public class MatchingStoryActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_matching_story, menu);
+        getMenuInflater().inflate(R.menu.menu_matching_battle, menu);
         return true;
     }
 
