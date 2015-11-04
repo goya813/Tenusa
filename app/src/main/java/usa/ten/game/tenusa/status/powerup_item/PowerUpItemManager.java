@@ -33,9 +33,15 @@ public class PowerUpItemManager
         mPowerUpItemList.add(item);
     }
 
-    public PowerUpItem getPowerUpItem(int index)
+    public PowerUpItem getPowerUpItem(int itemId)
     {
-       return mPowerUpItemList.get(index);
+        for (PowerUpItem item : mPowerUpItemList){
+            if (item.getItemId() == itemId){
+                return (item);
+            }
+        }
+
+        return (null);
     }
 
     public List<PowerUpItem> getPowerUpItemList() {
