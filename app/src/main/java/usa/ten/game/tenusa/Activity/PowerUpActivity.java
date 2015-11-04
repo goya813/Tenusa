@@ -18,30 +18,20 @@ import java.util.List;
 import usa.ten.game.tenusa.Adapter.PowerUpItemAdapter;
 import usa.ten.game.tenusa.Beans.PowerUpItemBeans;
 import usa.ten.game.tenusa.R;
+import usa.ten.game.tenusa.status.powerup_item.PowerUpItem;
+import usa.ten.game.tenusa.status.powerup_item.PowerUpItemManager;
 
-public class PowerUpActivity extends Activity {
+public class PowerUpActivity extends Activity
+{
+    private PowerUpItemManager mPowerUpItemManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_power_up);
 
-        Bitmap img;
-        img = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-
-        List<PowerUpItemBeans> items = new ArrayList<PowerUpItemBeans>();
-        PowerUpItemBeans item1 = new PowerUpItemBeans();
-        item1.setImg(img);
-        item1.setItemName("Droid");
-        item1.setCost(1000);
-
-        PowerUpItemBeans item2 = new PowerUpItemBeans();
-        item2.setImg(img);
-        item2.setItemName("Droid2");
-        item2.setCost(2000);
-
-        items.add(item1);
-        items.add(item2);
+        mPowerUpItemManager = PowerUpItemManager.getInstance();
+        List<PowerUpItem> items = loadPowerUpItem();
 
         PowerUpItemAdapter adapter = new PowerUpItemAdapter(this, 0, items);
 
@@ -64,6 +54,11 @@ public class PowerUpActivity extends Activity {
                         .show();
             }
         });
+    }
+
+    private List<PowerUpItem> loadPowerUpItem()
+    {
+        return (mPowerUpItemManager.getPowerUpItemList());
     }
 
     @Override
