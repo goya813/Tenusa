@@ -1,6 +1,7 @@
 package usa.ten.game.tenusa.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import usa.ten.game.tenusa.App;
 import usa.ten.game.tenusa.R;
 import usa.ten.game.tenusa.status.powerup_item.PowerUpItem;
 
@@ -47,6 +49,22 @@ public class PowerUpItemAdapter extends ArrayAdapter<PowerUpItem>
         itemCost = (TextView)convertView.findViewById(R.id.item_cost);
         itemCost.setText("消費ぽいんと：" + item.getCost());
 
+        if (item.getUnitsSold() >= 1) {
+            convertView.setBackgroundColor(Color.DKGRAY);
+            itemCost.setText(itemCost.getText() + " (購入済み)");
+        }
+
         return (convertView);
+    }
+
+    @Override
+    public boolean isEnabled(int position)
+    {
+        if (((PowerUpItem)getItem(position)).getUnitsSold() >= 1){
+            return (false);
+        }
+        else {
+            return (true);
+        }
     }
 }
