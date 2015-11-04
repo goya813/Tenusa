@@ -10,13 +10,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import usa.ten.game.tenusa.R;
 import usa.ten.game.tenusa.drawer.PointDrawerItem;
 import usa.ten.game.tenusa.drawer.PointDrawerView;
+import usa.ten.game.tenusa.status.charactor.usagi.Usagi;
 
 
-public class TopActivity extends Activity {
+public class TopActivity extends Activity
+{
+    private Usagi mUsagi;
 
     private Handler mDrawerViewHander = new Handler();
     private Handler mRoutinePointHandler = new Handler();
@@ -26,11 +30,16 @@ public class TopActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
 
+        mUsagi = Usagi.getInstance();
+
+        final TextView usagiStatusText = (TextView)findViewById(R.id.usagi_status);
+
         final PointDrawerView pointDrawerview = (PointDrawerView)findViewById(R.id.drawPointView);
         mDrawerViewHander.postDelayed(new Runnable() {
             @Override
             public void run() {
                 pointDrawerview.invalidate();
+                usagiStatusText.setText("普通のうさぎ  " + mUsagi.getPoint() + "pt");
 
                 mDrawerViewHander.postDelayed(this, 50);
             }
@@ -38,7 +47,8 @@ public class TopActivity extends Activity {
         mRoutinePointHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                pointDrawerview.addPoint(1);
+                mUsagi.addPoint(mUsagi.getPassivePower());
+                pointDrawerview.addPoint(mUsagi.getPassivePower());
 
                 mDrawerViewHander.postDelayed(this, 1000);
             }
@@ -48,7 +58,8 @@ public class TopActivity extends Activity {
         usagi.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                pointDrawerview.addPoint(2);
+                mUsagi.addPoint(mUsagi.getActivePower());
+                pointDrawerview.addPoint(mUsagi.getActivePower());
             }
         });
 
