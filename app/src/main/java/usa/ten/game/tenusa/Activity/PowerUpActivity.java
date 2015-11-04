@@ -12,11 +12,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import usa.ten.game.tenusa.Adapter.PowerUpItemAdapter;
-import usa.ten.game.tenusa.Beans.PowerUpItemBeans;
 import usa.ten.game.tenusa.R;
 import usa.ten.game.tenusa.status.powerup_item.PowerUpItem;
 import usa.ten.game.tenusa.status.powerup_item.PowerUpItemManager;

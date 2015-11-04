@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import usa.ten.game.tenusa.Beans.PowerUpItemBeans;
 import usa.ten.game.tenusa.R;
 import usa.ten.game.tenusa.status.powerup_item.PowerUpItem;
 

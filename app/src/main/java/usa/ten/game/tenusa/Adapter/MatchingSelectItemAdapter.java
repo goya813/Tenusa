@@ -1,6 +1,7 @@
 package usa.ten.game.tenusa.Adapter;
 
 import android.content.Context;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,6 @@ import android.widget.ImageView;
 
 import java.util.List;
 
-import usa.ten.game.tenusa.Beans.MatchingSelectItemBeans;
 import usa.ten.game.tenusa.R;
 import usa.ten.game.tenusa.status.charactor.enemy.Enemy;
 
