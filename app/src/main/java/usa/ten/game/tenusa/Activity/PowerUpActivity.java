@@ -16,11 +16,13 @@ import java.util.List;
 
 import usa.ten.game.tenusa.Adapter.PowerUpItemAdapter;
 import usa.ten.game.tenusa.R;
+import usa.ten.game.tenusa.status.charactor.usagi.Usagi;
 import usa.ten.game.tenusa.status.powerup_item.PowerUpItem;
 import usa.ten.game.tenusa.status.powerup_item.PowerUpItemManager;
 
 public class PowerUpActivity extends Activity
 {
+    private Usagi mUsagi;
     private PowerUpItemManager mPowerUpItemManager;
 
     @Override
@@ -28,24 +30,31 @@ public class PowerUpActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_power_up);
 
-        mPowerUpItemManager = PowerUpItemManager.getInstance();
+        mUsagi                  = Usagi.getInstance();
+        mPowerUpItemManager     = PowerUpItemManager.getInstance();
         List<PowerUpItem> items = loadPowerUpItem();
 
-        PowerUpItemAdapter adapter = new PowerUpItemAdapter(this, 0, items);
+        final PowerUpItemAdapter adapter = new PowerUpItemAdapter(this, 0, items);
 
-        ListView itemListView = (ListView)findViewById(R.id.powerup_item_list);
+        final ListView itemListView = (ListView)findViewById(R.id.powerup_item_list);
         itemListView.setAdapter(adapter);
 
         itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+            public void onItemClick(AdapterView<?> adapterView, View view, final int pos, long id) {
                 new AlertDialog.Builder(PowerUpActivity.this)
-                        .setTitle("title")
-                        .setMessage("message")
+                        .setTitle(adapter.getItem(pos).getName())
+                        .setMessage("購入しますか?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                PowerUpItem item = adapter.getItem(pos);
 
+                                item.buyItem();
+                                mUsagi.buyPowerUpItem(item.getItemId());
+
+                                View targetView = itemListView.getChildAt(pos);
+                                itemListView.getAdapter().getView(pos, targetView, itemListView);
                             }
                         })
                         .setNegativeButton("Cancel", null)
