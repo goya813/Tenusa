@@ -22,6 +22,7 @@ public class PowerUpItem
         mName         = name;
         mPassivePower = passivePower;
         mActivePower  = activePower;
+        mUnitsSold    = 0;
         mItemImg      = itemImg;
     }
 
@@ -35,6 +36,26 @@ public class PowerUpItem
 
     public String getName() {
         return mName;
+    }
+
+    public int getPassivePower() {
+        return mPassivePower;
+    }
+
+    public int getActivePower() {
+        return mActivePower;
+    }
+
+    public int getUnitsSold() {
+        return mUnitsSold;
+    }
+
+    public void buyItem(){
+        setUnitsSold(getUnitsSold() + 1);
+    }
+
+    public void setUnitsSold(int unitsSold) {
+        mUnitsSold = unitsSold;
     }
 
     public Bitmap getItemImg() {
