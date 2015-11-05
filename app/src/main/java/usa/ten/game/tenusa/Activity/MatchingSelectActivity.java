@@ -13,21 +13,25 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import usa.ten.game.tenusa.Adapter.MatchingSelectItemAdapter;
-import usa.ten.game.tenusa.Beans.MatchingSelectItemBeans;
 import usa.ten.game.tenusa.R;
+import usa.ten.game.tenusa.status.charactor.enemy.Enemy;
+import usa.ten.game.tenusa.status.charactor.enemy.EnemyManager;
 
-public class MatchingSelectActivity extends Activity {
+public class MatchingSelectActivity extends Activity
+{
+    private EnemyManager mEnemyManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matching_select);
 
-        List<MatchingSelectItemBeans> items = loadMatchingItems();
+        mEnemyManager = EnemyManager.getInstance();
+
+        List<Enemy> items = loadMatchingItems();
         MatchingSelectItemAdapter adapter = new MatchingSelectItemAdapter(this, R.layout.matching_select_item, items);
 
         GridView personGrid = (GridView)findViewById(R.id.person_grid);
@@ -53,20 +57,9 @@ public class MatchingSelectActivity extends Activity {
         });
     }
 
-    private ArrayList<MatchingSelectItemBeans> loadMatchingItems()
+    private List<Enemy> loadMatchingItems()
     {
-        ArrayList<MatchingSelectItemBeans> items = new ArrayList<MatchingSelectItemBeans>();
-        Bitmap img;
-        img = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-
-        for (int i = 0; i < 10; i++){
-            MatchingSelectItemBeans item = new MatchingSelectItemBeans();
-            item.setFaceImg(img);
-
-            items.add(item);
-        }
-
-        return (items);
+        return (mEnemyManager.getEnemyList());
     }
 
     @Override
