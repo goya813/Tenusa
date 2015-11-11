@@ -13,6 +13,13 @@ public class Enemy
     private boolean mDefeated;
     private Bitmap mFaceImg;
 
+
+    public Enemy(int enemyId, boolean deafeated)
+    {
+        mEnemyId  = enemyId;
+        mDefeated = deafeated;
+    }
+
     public Enemy(int enemyId, int hp, String name, boolean defeated, Bitmap faceImg){
         mEnemyId  = enemyId;
         mHp       = hp;
@@ -35,6 +42,15 @@ public class Enemy
 
     public boolean isDefeated() {
         return mDefeated;
+    }
+
+    public int getDefeated()
+    {
+        if (isDefeated()){
+            return (1);
+        }
+
+        return (0);
     }
 
     public void setDefeated(boolean defeated) {

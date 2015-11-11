@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import usa.ten.game.tenusa.R;
+import usa.ten.game.tenusa.database.SqliteDAO;
 import usa.ten.game.tenusa.drawer.PointDrawerItem;
 import usa.ten.game.tenusa.drawer.PointDrawerView;
 import usa.ten.game.tenusa.status.charactor.usagi.Usagi;
@@ -24,13 +25,17 @@ public class TopActivity extends Activity
 
     private Handler mDrawerViewHander = new Handler();
     private Handler mRoutinePointHandler = new Handler();
+    private SqliteDAO mSqliteDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
 
+        mSqliteDao = SqliteDAO.getInstance();
+
         mUsagi = Usagi.getInstance();
+        mUsagi.setPoint(mSqliteDao.selectPoint());
 
         final TextView usagiStatusText = (TextView)findViewById(R.id.usagi_status);
 
@@ -80,6 +85,14 @@ public class TopActivity extends Activity
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+
+        mSqliteDao.updatePoint(mUsagi.getPoint());
     }
 
     @Override

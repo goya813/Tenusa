@@ -15,6 +15,12 @@ public class PowerUpItem
     private int mUnitsSold;
     private Bitmap mItemImg;
 
+    public PowerUpItem(int itemId, int unitsSold)
+    {
+        mItemId = itemId;
+        mUnitsSold = unitsSold;
+    }
+
     public PowerUpItem(int itemId, int cost, String name, int passivePower, int activePower, Bitmap itemImg)
     {
         mItemId       = itemId;
