@@ -35,6 +35,10 @@ public class Usagi
         return (instance);
     }
 
+    public void setPoint(int point) {
+        mPoint = point;
+    }
+
     public int getPoint() {
         return mPoint;
     }
