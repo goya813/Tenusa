@@ -16,12 +16,16 @@ import usa.ten.game.tenusa.R;
 import usa.ten.game.tenusa.database.SqliteDAO;
 import usa.ten.game.tenusa.drawer.PointDrawerItem;
 import usa.ten.game.tenusa.drawer.PointDrawerView;
+import usa.ten.game.tenusa.status.charactor.enemy.EnemyManager;
 import usa.ten.game.tenusa.status.charactor.usagi.Usagi;
+import usa.ten.game.tenusa.status.powerup_item.PowerUpItemManager;
 
 
 public class TopActivity extends Activity
 {
     private Usagi mUsagi;
+    private EnemyManager mEnemyManager;
+    private PowerUpItemManager mPowerUpManager;
 
     private Handler mDrawerViewHander = new Handler();
     private Handler mRoutinePointHandler = new Handler();
@@ -35,7 +39,9 @@ public class TopActivity extends Activity
         mSqliteDao = SqliteDAO.getInstance();
 
         mUsagi = Usagi.getInstance();
-        mUsagi.setPoint(mSqliteDao.selectPoint());
+        mEnemyManager = EnemyManager.getInstance();
+        mPowerUpManager = PowerUpItemManager.getInstance();
+
 
         final TextView usagiStatusText = (TextView)findViewById(R.id.usagi_status);
 
@@ -92,7 +98,9 @@ public class TopActivity extends Activity
     {
         super.onPause();
 
-        mSqliteDao.updatePoint(mUsagi.getPoint());
+        mUsagi.save();
+//        mEnemyManager.save();
+        mPowerUpManager.save();
     }
 
     @Override
