@@ -84,6 +84,14 @@ public class SqliteDAO
         return (res);
     }
 
+    public void insertPowerUpItem(PowerUpItem item)
+    {
+        String[] keys = {"id", "unitssold"};
+        Object[] vals = {item.getItemId(), item.getUnitsSold()};
+
+        mSqliteManager.insert("powerup_items", keys, vals);
+    }
+
     public void updatePowerUpItem(PowerUpItem powerupItem)
     {
         String sql = String.format("UPDATE powerup_items SET unitssold = %d where id = %d;", powerupItem.getUnitsSold(), powerupItem.getItemId());
