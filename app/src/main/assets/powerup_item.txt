@@ -1,0 +1,5 @@
+id:0, cost:10, name:hinokinobou, passive_power:3, active_power:3, img_name:ic_launcher
+id:1, cost:30, name:konbou, passive_power:5, active_power:5, img_name:ic_launcher
+id:2, cost:50, name:tetsunoken, passive_power:7, active_power:7, img_name:ic_launcher
+id:3, cost:60, name:katana, passive_power:9, active_power:9, img_name:ic_launcher
+id:4, cost:160, name:yuusyanoken, passive_power:100, active_power:100, img_name:ic_launcher

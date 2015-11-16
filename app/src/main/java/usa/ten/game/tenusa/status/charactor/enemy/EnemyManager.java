@@ -8,6 +8,7 @@ import java.util.List;
 
 import usa.ten.game.tenusa.App;
 import usa.ten.game.tenusa.R;
+import usa.ten.game.tenusa.database.SqliteDAO;
 
 /**
  * Created by goya on 15/11/03.
@@ -16,10 +17,12 @@ public class EnemyManager
 {
     private static EnemyManager instance = new EnemyManager();
 
+    private SqliteDAO mSqliteDao;
     private List<Enemy> mEnemyList = new ArrayList<>();
 
     private EnemyManager()
     {
+        mSqliteDao = SqliteDAO.getInstance();
         loadEnemy();
     }
     public static EnemyManager getInstance()
@@ -39,6 +42,13 @@ public class EnemyManager
 
     public List<Enemy> getEnemyList() {
         return mEnemyList;
+    }
+
+    public void save()
+    {
+        for (Enemy item : mEnemyList){
+            mSqliteDao.updateEnemy(item);
+        }
     }
 
     private void loadEnemy()

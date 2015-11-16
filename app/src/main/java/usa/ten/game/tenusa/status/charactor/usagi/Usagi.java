@@ -1,8 +1,11 @@
 package usa.ten.game.tenusa.status.charactor.usagi;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import usa.ten.game.tenusa.database.SqliteDAO;
+import usa.ten.game.tenusa.status.powerup_item.PowerUpItem;
 import usa.ten.game.tenusa.status.powerup_item.PowerUpItemManager;
 
 /**
@@ -12,6 +15,7 @@ public class Usagi
 {
     private static Usagi instance = new Usagi();
 
+    private SqliteDAO mSqliteDao;
     private PowerUpItemManager mPowerUpItemManager;
 
     private int mPoint;
@@ -24,11 +28,20 @@ public class Usagi
     private Usagi()
     {
         mPowerUpItemManager = PowerUpItemManager.getInstance();
+        mSqliteDao = SqliteDAO.getInstance();
+        List<PowerUpItem> powerUpItems = mSqliteDao.selectPowerUpItem();
 
-        mPoint = 0;
-        mPassivePower = 1;
-        mActivePower  = 1;
-        mStrongestPowerUpItemId = -1;
+        setPoint(mSqliteDao.selectPoint());
+        if (powerUpItems.size() == 0){
+            mPassivePower = 1;
+            mActivePower  = 1;
+            mStrongestPowerUpItemId = -1;
+        }
+        else {
+            for (PowerUpItem item : powerUpItems){
+                buyPowerUpItem(item.getItemId());
+            }
+        }
     }
     public static Usagi getInstance()
     {
@@ -86,5 +99,10 @@ public class Usagi
 
     public void addDefeatEnemy(int defeatEnemy) {
         mDefeatEnemy.add(defeatEnemy);
+    }
+
+    public void save()
+    {
+        mSqliteDao.updatePoint(mPoint);
     }
 }
