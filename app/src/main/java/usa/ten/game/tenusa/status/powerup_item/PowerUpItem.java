@@ -56,7 +56,7 @@ public class PowerUpItem
         return mUnitsSold;
     }
 
-    public void buyItem(){
+    public void sold(){
         setUnitsSold(getUnitsSold() + 1);
     }
 
