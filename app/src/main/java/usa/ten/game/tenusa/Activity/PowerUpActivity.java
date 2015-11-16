@@ -50,7 +50,7 @@ public class PowerUpActivity extends Activity
                             public void onClick(DialogInterface dialog, int which) {
                                 PowerUpItem item = adapter.getItem(pos);
 
-                                item.buyItem();
+                                mPowerUpItemManager.soldItem(item.getItemId());
                                 mUsagi.buyPowerUpItem(item.getItemId());
 
                                 View targetView = itemListView.getChildAt(pos);
