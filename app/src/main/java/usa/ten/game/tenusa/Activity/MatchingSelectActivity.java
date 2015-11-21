@@ -32,21 +32,24 @@ public class MatchingSelectActivity extends Activity
         mEnemyManager = EnemyManager.getInstance();
 
         List<Enemy> items = loadMatchingItems();
-        MatchingSelectItemAdapter adapter = new MatchingSelectItemAdapter(this, R.layout.matching_select_item, items);
+        final MatchingSelectItemAdapter adapter = new MatchingSelectItemAdapter(this, R.layout.matching_select_item, items);
 
         GridView personGrid = (GridView)findViewById(R.id.person_grid);
         personGrid.setAdapter(adapter);
 
         personGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+            public void onItemClick(AdapterView<?> adapterView, View view, final int pos, long id) {
                 new AlertDialog.Builder(MatchingSelectActivity.this)
                         .setTitle("title")
                         .setMessage("message")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                int id = adapter.getItem(pos).getEnemyId();
                                 Intent intent  = new Intent(MatchingSelectActivity.this, MatchingStoryActivity.class);
+                                intent.putExtra("enemyId", id);
+
                                 startActivity(intent);
                                 finish();
                             }
