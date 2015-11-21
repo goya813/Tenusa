@@ -99,7 +99,7 @@ public class TopActivity extends Activity
         super.onPause();
 
         mUsagi.save();
-//        mEnemyManager.save();
+        mEnemyManager.save();
         mPowerUpManager.save();
     }
 
