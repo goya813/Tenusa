@@ -2,6 +2,7 @@ package usa.ten.game.tenusa.Adapter;
 
 import android.content.Context;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,10 @@ public class MatchingSelectItemAdapter extends ArrayAdapter<Enemy>
         ImageView faceImg;
         faceImg = (ImageView)convertView.findViewById(R.id.face_img);
         faceImg.setImageBitmap(item.getFaceImg());
+
+        if (item.isDefeated()) {
+            convertView.setBackgroundColor(Color.DKGRAY);
+        }
 
         return (convertView);
     }
