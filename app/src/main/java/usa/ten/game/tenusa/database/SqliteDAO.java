@@ -44,8 +44,12 @@ public class SqliteDAO
 
         for (String[] item : items){
             int id           = Integer.valueOf(item[0]);
-            boolean defeated = Boolean.valueOf(item[1]);
-            Enemy enemy      = new Enemy(id, defeated);
+            boolean defeated = false;
+            if (Integer.valueOf(item[1]) == 1){
+                defeated = true;
+            }
+
+            Enemy enemy  = new Enemy(id, defeated);
 
             res.add(enemy);
         }
