@@ -7,15 +7,35 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import usa.ten.game.tenusa.R;
+import usa.ten.game.tenusa.status.charactor.enemy.Enemy;
+import usa.ten.game.tenusa.status.charactor.enemy.EnemyManager;
 
-public class MatchingBattleActivity extends Activity {
+public class MatchingBattleActivity extends Activity
+{
+    private static String BASE_DESCRIPTION = "タッチしまくれ！ HP:";
+
+    private TextView mDescription;
+    private EnemyManager mEnemyManager;
+
+    private int mEnemyId;
+    private int mEnemyHp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matching_battle);
+
+        mDescription = (TextView)findViewById(R.id.description);
+
+        mEnemyManager = EnemyManager.getInstance();
+        mEnemyId = getIntent().getIntExtra("enemyId", -1);
+        Enemy enemy= mEnemyManager.getEnemy(mEnemyId);
+
+        mEnemyHp = enemy.getHp();
+        mDescription.setText(BASE_DESCRIPTION + mEnemyHp);
 
         setClickListener();
     }
@@ -29,7 +49,13 @@ public class MatchingBattleActivity extends Activity {
 
                 switch (motionEvent.getAction()){
                     case MotionEvent.ACTION_DOWN:
+                        mEnemyHp--;
+                        if (mEnemyHp == 0){
+                            finishBattle();
+                        }
+
                         usagiImg.setImageResource(R.mipmap.usagi_attack);
+                        mDescription.setText(BASE_DESCRIPTION + mEnemyHp);
                         break;
 
                     case MotionEvent.ACTION_UP:
@@ -40,6 +66,13 @@ public class MatchingBattleActivity extends Activity {
                 return true;
             }
         });
+    }
+
+    private void finishBattle()
+    {
+        mEnemyManager.defeatEnemy(mEnemyId);
+
+        finish();
     }
 
     @Override

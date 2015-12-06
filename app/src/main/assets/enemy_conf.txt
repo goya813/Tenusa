@@ -1,0 +1,4 @@
+id:0, hp:10, name:atsushi1, img_name:ic_launcher
+id:1, hp:15, name:atsushi2, img_name:ic_launcher
+id:2, hp:20, name:atsushi3, img_name:ic_launcher
+id:3, hp:25, name:atsushi4, img_name:ic_launcher

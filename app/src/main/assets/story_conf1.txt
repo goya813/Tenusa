@@ -1,0 +1,3 @@
+enemy:ハロー
+me:ハロー
+enemy:よろ
