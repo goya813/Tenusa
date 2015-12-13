@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -15,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import usa.ten.game.tenusa.Adapter.MatchingStoryAdapter;
 import usa.ten.game.tenusa.R;
 import usa.ten.game.tenusa.status.StoryText;
 import usa.ten.game.tenusa.status.charactor.enemy.Enemy;
@@ -23,14 +23,13 @@ import usa.ten.game.tenusa.util.UtilAssets;
 
 public class MatchingStoryActivity extends Activity
 {
-    private static String TEXT_ME    = "me";
-    private static String TEXT_ENEMY = "enemy";
+    private static String KEY_ME    = "me";
+    private static String KEY_ENEMY = "enemy";
     private static String BASE_CONF_NAME = "story_conf";
     private static String EXTENSION = "txt";
 
     private EnemyManager mEnemyManager;
 
-    private List<StoryText> mStoryTexts = new ArrayList<>();
     private int mStoryStage = 0;
 
     @Override
@@ -42,9 +41,8 @@ public class MatchingStoryActivity extends Activity
         int enemyId = getIntent().getIntExtra("enemyId", -1);
         final Enemy enemy = mEnemyManager.getEnemy(enemyId);
 
-        final List<String> texts = loadStoryText(enemyId);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_expandable_list_item_1, new ArrayList<String>());
+        final List<StoryText> texts = loadStoryText(enemyId);
+        final MatchingStoryAdapter adapter = new MatchingStoryAdapter(this, R.layout.matching_story_item, new ArrayList<StoryText>());
         adapter.add(texts.get(0));
 
         ListView storyList = (ListView)findViewById(R.id.story_list);
@@ -70,41 +68,30 @@ public class MatchingStoryActivity extends Activity
         });
     }
 
-    private List<String> loadStoryText(int enemyId)
+    private List<StoryText> loadStoryText(int enemyId)
     {
         String confFile = BASE_CONF_NAME + enemyId + "." + EXTENSION;
         List<HashMap<String, String>> items = UtilAssets.loadAssets(confFile);
         List<String> texts = new ArrayList<>();
+        List<StoryText> storyTexts = new ArrayList<>();
 
         for (HashMap<String, String> item : items){
             String text = "";
             boolean flagMe;
 
-            if (item.containsKey(TEXT_ME)){
-                text = item.get(TEXT_ME);
+            if (item.containsKey(KEY_ME)){
+                text = item.get(KEY_ME);
                 flagMe = true;
             }
             else {
-                text = item.get(TEXT_ENEMY);
+                text = item.get(KEY_ENEMY);
                 flagMe = false;
             }
 
-            Log.v("loadStoryText", "load");
-            if (text == null){
-                Log.v("loadStoryText", "null");
-            }
-            Log.v("loadStoryText", text);
-            mStoryTexts.add(new StoryText(flagMe, text));
-
-            if (flagMe){
-                texts.add("私:" + text);
-            }
-            else {
-                texts.add("敵:" + text);
-            }
+            storyTexts.add(new StoryText(flagMe, text));
         }
 
-        return (texts);
+        return (storyTexts);
     }
 
     @Override
