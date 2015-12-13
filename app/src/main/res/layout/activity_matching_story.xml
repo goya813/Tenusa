@@ -27,5 +27,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/next_button"/>
+        android:layout_above="@+id/next_button"
+        android:divider="#00000000"/>
 </RelativeLayout>
